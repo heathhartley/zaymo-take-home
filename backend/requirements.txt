@@ -1,0 +1,8 @@
+fastapi[standard]
+fastapi[all]
+uvicorn[standard]
+sqlalchemy
+pydantic
+aiofiles
+python-multipart
+beautifulsoup4
