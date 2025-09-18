@@ -11,7 +11,7 @@ export default function FileUpload() {
   const [loading, setLoading] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState("");
   const [previewHtml, setPreviewHtml] = useState(""); 
-  
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
 
@@ -61,6 +61,12 @@ export default function FileUpload() {
     }
   };
 
+  const handleClearAll = () => {
+    setFile(null);
+    setDownloadUrl("");
+    setPreviewHtml("");
+  };
+
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
@@ -101,7 +107,22 @@ export default function FileUpload() {
     backgroundColor: "#a0c9f5",
     cursor: "not-allowed",
   };
+  const buttonStyle = {
+    padding: "12px 24px",
+    borderRadius: "8px",
+    border: "none",
+    backgroundColor: "#70b8fa",
+    color: "#fff",
+    fontWeight: "bold",
+    cursor: "pointer",
+    transition: "background-color 0.2s",
+  };
 
+  const clearButtonContainerStyle = {
+    width: "80%",
+    display: "flex",
+    justifyContent: "flex-end", 
+  };
 
   return (
     <div style={containerStyle}>
@@ -129,7 +150,23 @@ export default function FileUpload() {
       {downloadUrl && <DownloadHtml downloadUrl={downloadUrl} fileName={file.name} />}
 
       {previewHtml && <PreviewHtml previewHtml={previewHtml} />}
+
+      {(downloadUrl) && (
+        <div style={clearButtonContainerStyle}>
+          <button
+            onClick={handleClearAll}
+            style={buttonStyle}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#4a90e2")}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#70b8fa")}
+          >
+            Clear All
+          </button>
+        </div>
+      )}
+
     </div>
+
+
 
   );
 }
